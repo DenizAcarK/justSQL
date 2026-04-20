@@ -44,3 +44,23 @@ where date_part('year', event_date) = (
     order by c desc
     limit 1
 );
+
+with recursive r as (
+    select  webuser where email 
+)
+
+-- 1NF, no duplicate groups all values atomic (key should exist)
+-- 2NF, no partial key dependency, sort all the key values ( non-key should depend on the whole key)
+-- 3NF no transitive dependency, sort all the non-key values (non-key should depend on the ONLY the key)
+
+
+-*
+when you have things like
+
+interest
+machine learning, mobile dev, 
+- it is not atomic, you have not achinved atomicity 
+*-
+
+select string_to_array(terms, ',') from products;
+--{Diarrhea, pain, vomitting}
