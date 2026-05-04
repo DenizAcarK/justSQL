@@ -64,3 +64,11 @@ machine learning, mobile dev,
 
 select string_to_array(terms, ',') from products;
 --{Diarrhea, pain, vomitting}
+
+select * from (
+select country, name, net_worth,
+rank() over (partition by countey order by net_worth desc) r
+from billionair
+order by country, r ) tmp
+where r = 1
+order by country

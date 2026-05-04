@@ -3,7 +3,7 @@ import email
 import os
 
 from dotenv import load_dotenv
-from sqlalchemy import create_engine, ForeignKey, insert
+from sqlalchemy import create_engine, ForeignKey, insert, select #insert and select neeed sto be imported 
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from typing import List #get the lists
 from datetime import datetime
@@ -68,9 +68,15 @@ class Rental(Base):
 print(Base.metadata.tables) #TABLES POPULATED
 
 
-r1 = "1, 116, deniz@gmail.com, 01/01/2024, 02/02/2024"
+# Basic INSERT
+stmt = insert(Rental).values(
+    rental_id=1,
+    scooter_num=116,
+    email="deniz@gmail.com",
+    start_date=datetime(2024, 1, 1),
+    end_date=datetime(2024, 2, 2)
+)
 
-insert(Rental).values(r1)
-insert(Rental).values(rental_id = 2, scooter_num = 22, email = "denizacar@gmail.com", start_date= "01/01/2024")
-
-
+# Basic SELECT
+q = select(Rental).where(Rental.rental_id == 1)
+result = session.execute(q)
